@@ -1,12 +1,47 @@
-package com.messageBoard.model;
+package note.vo;
 
-public class Users {
+public class Person {
     private int userId;
     private String userName;
     private String userCount;
     private String userPassword;
+    private String flag;
+    private String active;
+    private String image;
 
-    public Users() {
+    public String getActive() {
+        return active;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getActive(String string) {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public Person() {
+        this.flag = flag;
+    }
+
+    public Person(int userId, String userName, String userCount, String userPassword) {
         this.userId = userId;
         this.userName = userName;
         this.userCount = userCount;
