@@ -3,14 +3,26 @@ package note.vo;
 public class Person {
     private int userId;
     private String userName;
-    private String userCount;
     private String userPassword;
+    private String email;
     private String flag;
     private String active;
     private String image;
 
     public String getActive() {
         return active;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Person(String email) {
+        this.email = email;
     }
 
     public String getImage() {
@@ -41,10 +53,10 @@ public class Person {
         this.flag = flag;
     }
 
-    public Person(int userId, String userName, String userCount, String userPassword) {
+    public Person(int userId, String userName, String userPassword) {
         this.userId = userId;
         this.userName = userName;
-        this.userCount = userCount;
+
         this.userPassword = userPassword;
     }
 
@@ -62,14 +74,6 @@ public class Person {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserCount() {
-        return userCount;
-    }
-
-    public void setUserCount(String userCount) {
-        this.userCount = userCount;
     }
 
     public String getUserPassword() {
