@@ -31,23 +31,29 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String rand = (String) session.getAttribute("rand");
         String input = request.getParameter("verify");
-
         try {
             if (DAOFactory.getPersonDAOInstance().login(person) && rand.equals(input)) {
-                System.out.println("judge login 123");
-                session.setAttribute("name",person.getUserName());
-                session.setAttribute("image",person.getImage());
-                session.setAttribute("id",person.getUserId());
-                if (person.getActive().equals("1")){
-                    request.getRequestDispatcher("main.jsp");
-                }else {
-                    request.getRequestDispatcher("err.jsp");
+                session.setAttribute("name", person.getUserName());
+                session.setAttribute("image", person.getImage());
+                session.setAttribute("id", person.getUserId());
+                if (person.getActive().equals("1")) {
+                    request.getRequestDispatcher("login_success.jsp").forward(request, response);
+                } else {
+                    request.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html;charset=UTF-8");
+                    PrintWriter printWriter = response.getWriter();
+                    printWriter.println("<html>");
+                    printWriter.println("<body><center><h3>");
+                    printWriter.println("你的账号还没激活，请激活！");
+                    printWriter.println("<a href =login.html>请登录</a>");
+                    printWriter.println("</h3></center></body>");
+                    printWriter.println("</html>");
+                    request.getRequestDispatcher("err.jsp").forward(request, response);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

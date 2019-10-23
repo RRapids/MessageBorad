@@ -11,7 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-登录失败
+你不是本站合法用户
+
 <a href="login.html">返回登录</a>
 </body>
 </html>

@@ -9,55 +9,14 @@ public class Person {
     private String active;
     private String image;
 
-    public String getActive() {
-        return active;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Person(String email) {
-        this.email = email;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getActive(String string) {
-        return active;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
-
     public Person() {
-        this.flag = flag;
-    }
-
-    public Person(int userId, String userName, String userPassword) {
         this.userId = userId;
         this.userName = userName;
-
         this.userPassword = userPassword;
+        this.email = email;
+        this.flag = flag;
+        this.active = active;
+        this.image = image;
     }
 
     public int getUserId() {
@@ -82,5 +41,37 @@ public class Person {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

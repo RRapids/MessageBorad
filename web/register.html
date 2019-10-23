@@ -18,7 +18,8 @@
             </tr>
             <tr>
                 <td height="40" align="right">头像：</td>
-                <td ><select name="image" size="1" onchange="document.images['avatar'].src=options[selectedIndex].value;">
+                <td><select name="image" size="1"
+                            onchange="document.images['avatar'].src=options[selectedIndex].value;">
                     <option value="images\face\Image1.gif">Image1
                     <option value="images\face\Image2.gif">Image2
                     <option value="images\face\Image3.gif">Image3
@@ -34,10 +35,6 @@
                 </td>
             </tr>
             <tr>
-                <td height="40" align="right">账号：</td>
-                <td width="200" align="left" valign="middle">&nbsp;<input type="text" name="count" size="20"/></td>
-            </tr>
-            <tr>
                 <td height="40" align="right">密码：&nbsp;</td>
                 <td height="40" align="left" valign="middle">&nbsp;<input type="password" name="password" size="21"/>
                 </td>
@@ -46,6 +43,9 @@
                 <td height="40" align="right">邮箱：&nbsp;</td>
                 <td height="40" align="left" valign="middle">&nbsp;<input type="email" name="email" size="21"/>
                 </td>
+            </tr>
+            <tr>
+                <td><input type="hidden" name="flag" value=1>
             </tr>
             <tr>
                 <td height="40" colspan="2" align="center"><input type="submit" value=" 确定 "/>
