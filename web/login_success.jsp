@@ -45,7 +45,7 @@
         你是第<%=application.getAttribute("counter")%>个用户
     </h3>
     <a href="">用户管理</a>
-    <a href="">进入留言板</a>
+    <a href="list_note.jsp">进入留言板</a>
 
     <%}
         else {
