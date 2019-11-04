@@ -3,8 +3,6 @@ package note.servlet;
 import note.factory.DAOFactory;
 import note.util.Mail;
 import note.vo.Person;
-import sun.plugin.services.WPlatformService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

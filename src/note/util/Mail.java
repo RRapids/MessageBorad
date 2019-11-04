@@ -1,12 +1,15 @@
 package note.util;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import java.util.*;
-
-
 import note.vo.Person;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.Properties;
 /**\
  * 
  * 使用JavaMail发送邮件
@@ -39,7 +42,7 @@ public class Mail {
 			message.setSentDate(new Date());
 			// 设置e-mail内容
 			message.setContent(person.getUserName()+"：请经常访问本网站！" +
-					"<br><a href='http://localhost:8888/MessageBoard/email?id="+person.getUserId()+"&active="+person.getActive()+"'>请点击激活帐号</a>", "text/html;charset=UTF-8");
+					"<br><a href='http://localhost:8080/MessageBoard/email?id="+person.getUserId()+"&active="+person.getActive()+"'>请点击激活帐号</a>", "text/html;charset=UTF-8");
 			// 保存对于Email.的修改
 			message.saveChanges();
 			// 根据Session生成Transport对象

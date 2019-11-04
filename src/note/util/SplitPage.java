@@ -25,6 +25,7 @@ public class SplitPage {
 
     public int getTotalRows() {
         return totalRows;
+
     }
 
     public void setTotalRows(int totalRows) {

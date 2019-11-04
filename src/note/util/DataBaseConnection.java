@@ -1,11 +1,13 @@
 package note.util;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.* ;
 
 public class DataBaseConnection {
 
 	private String DBDRIVER	= "com.mysql.jdbc.Driver" ;
-	private String DBURL = "jdbc:mysql://localhost:3306/notes" ;
+	private String DBURL = "jdbc:mysql://localhost:3306/db_notes" ;
 	private String DBUSER	= "root" ;
 	private String DBPASSWORD = "root" ;
 	private Connection conn	= null ;
@@ -36,5 +38,9 @@ public class DataBaseConnection {
 		{
 		}
 	}
+
+    public static void main(String[] args) {
+        System.out.println("OK");
+    }
 
 };

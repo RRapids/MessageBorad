@@ -4,7 +4,6 @@ import note.dao.NoteDAO;
 import note.util.DataBaseConnection;
 import note.util.SplitPage;
 import note.vo.Note;
-import note.vo.Person;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +56,18 @@ public class NoteDAOImpl implements NoteDAO {
 
     @Override
     public int getRows(HashMap tm) throws Exception {
-        return 0;
+        List<Note> list = null;
+        if (tm.isEmpty()) {
+            list = queryAll();
+        } else {
+            list = queryByLike(tm
+            );
+        }
+        int num = list.size();
+
+
+        return list.size();
+
     }
 
     @Override
