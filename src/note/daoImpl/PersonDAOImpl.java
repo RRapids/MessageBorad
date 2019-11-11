@@ -131,4 +131,16 @@ public class PersonDAOImpl extends DataBaseConnection implements PersonDAO {
         pstmt.executeUpdate();
         pstmt.close();
     }
+
+    @Override
+    public void update(Person person) throws Exception {
+        DataBaseConnection dbc = new DataBaseConnection();
+        String sql = "UPDATE person SET image=? WHERE id =?";
+        PreparedStatement pstmt = dbc.getConnection().prepareStatement(sql);
+        pstmt.setString(1,person.getImage());
+        pstmt.setInt(2,person.getUserId());
+        pstmt.executeUpdate();
+        pstmt.close();
+        dbc.close();
+    }
 }

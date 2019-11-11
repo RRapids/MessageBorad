@@ -60,14 +60,10 @@ public class NoteDAOImpl implements NoteDAO {
         if (tm.isEmpty()) {
             list = queryAll();
         } else {
-            list = queryByLike(tm
-            );
+            list = queryByLike(tm);
         }
         int num = list.size();
-
-
-        return list.size();
-
+        return num;
     }
 
     @Override
@@ -75,19 +71,60 @@ public class NoteDAOImpl implements NoteDAO {
         List<Note> all = new ArrayList<>();
         String str = null;
         if (cond.containsKey("title")) {
-            str = "title LIKE " + "'" + cond.get("title") + "'";
-            String sql = "select * from note where " + str;
+            str = "title LIKE " + "'%" + cond.get("title") + "%'";
         }
-
         if (cond.containsKey("author")) {
-            str = "author LIKE " + "'" + cond.get("author") + "'";
-            String sql = "select * from note where " + str;
+            str = "author LIKE " + "'%" + cond.get("author") + "%'";
         }
+        if (cond.containsKey("content")) {
+            str = "author LIKE " + "'%" + cond.get("content") + "%'";
+        }
+        String sql = "select * from note where " + str;
+        DataBaseConnection dbc = new DataBaseConnection();
+        PreparedStatement pstmt = dbc.getConnection().prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Note note = new Note();
+            note.setId(rs.getInt(1));
+            note.setTitle(rs.getString(2));
+            note.setAuthor(rs.getString(3));
+            note.setContent(rs.getString(4));
+            all.add(note);
+        }
+        dbc.close();
+        pstmt.close();
+        rs.close();
         return all;
     }
 
     @Override
     public List<Note> queryByLike(HashMap cond, SplitPage sp) throws Exception {
-        return null;
+        List<Note> list = new ArrayList();
+        String str = null;
+        if (cond.containsKey("title")) {
+            str = "title LIKE " + " '%" + cond.get("title") + "%'";
+        }
+        if (cond.containsKey("author")) {
+            str = "author LIKE " + " '%" + cond.get("author") + "%'";
+        }
+        if (cond.containsKey("content")) {
+            str = "content LIKE" + " '%" + cond.get("content") + "%'";
+        }
+        String sql = "SELECT * FROM note WHERE " + str + " LIMIT " + sp.getPageRows() * (sp.getCurrentPage() - 1) + "," + sp.getPageRows();
+        DataBaseConnection dbc = new DataBaseConnection();
+        PreparedStatement pstmt = dbc.getConnection().prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery(sql);
+        while (rs.next()) {
+            Note note = new Note();
+            note.setId(rs.getInt(1));
+            note.setTitle(rs.getString(2));
+            note.setAuthor(rs.getString(3));
+            note.setContent(rs.getString(4));
+            list.add(note);
+        }
+        dbc.close();
+        rs.close();
+        pstmt.close();
+        return list;
     }
 }

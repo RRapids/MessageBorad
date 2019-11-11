@@ -4,6 +4,7 @@ import note.dao.NoteDAO;
 import note.factory.DAOFactory;
 import note.vo.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,5 +33,8 @@ class NoteDAOImplTest {
 
     @org.junit.jupiter.api.Test
     void testQueryByLike() {
+        List<Note> list = new ArrayList<>();
+        String key = "admin";
+
     }
 }

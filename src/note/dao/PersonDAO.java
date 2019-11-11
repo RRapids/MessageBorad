@@ -17,5 +17,6 @@ public interface PersonDAO {
     public Person checkPersonById(String id) throws Exception;
     //修改已通过邮件进行激活的用户
     public void update(String id) throws Exception;
-
+    //修改用户信息
+    public void update(Person person) throws Exception;
 }

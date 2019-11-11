@@ -11,6 +11,31 @@
     <title>用户信息</title>
 </head>
 <body>
-上传头像
+<%
+    int id = (int) session.getAttribute("id");
+    String name = (String) session.getAttribute("name");
+%>
+<center>
+    <form action="uploadImage.do" method="post" enctype="multipart/form-data">
+        <table>
+            <br><br>
+            <h1><font color="#00008b">修改头像</font></h1><br>
+            <h2>用户名:<%=session.getAttribute("name")%></h2>
+            <br>
+            <label for="file">上传头像图片：</label> <input type="file" id="file" name="file" value="D:\javastudy\project\MessageBorad\web\images\face">
+            <br>
+            <h4><font color="#cd5c5c">注意：文件大小不能超过10KB</font></h4><br>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="id" value="<%=id%>">
+                    <div align="center">
+                        <input type="submit" value="提交">
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</center>
 </body>
 </html>

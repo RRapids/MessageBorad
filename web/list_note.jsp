@@ -4,7 +4,8 @@
 <%@ page import="note.vo.Note" %>
 <%@ page import="java.awt.*" %>
 <%@ page import="note.util.SplitPage" %>
-<%@ page import="java.util.HashMap" %><%--
+<%@ page import="java.util.HashMap" %>
+<%@ page import="note.factory.DAOFactory" %><%--
   Created by IntelliJ IDEA.
   User: 79876
   Date: 2019/10/23
@@ -14,7 +15,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>留言列表</title>
+    <script type="text/javascript">
+        function go() {
+            var goPage = document.all.selectPage.value;
+            alert("我们将去页面:list_note.jsp?flag=" + goPage);
+            document.open("list_note.jsp?flag=" + goPage, "_self", "");
+        }
+    </script>
+
 </head>
 <body>
 <img src="images/else/bg2.jpg" align="top" height="100" width="1920" alt="欢迎进入留言板">
@@ -25,7 +34,7 @@
     <a href="list_note.jsp?flag=first">显示所有留言</a>
     <hr>
 
-    <form action="#">
+    <form action="list_note.jsp?flag=first" method="post">
         <table>
             <tr>
                 <td>在</td>
@@ -51,12 +60,12 @@
         if (session.getAttribute("name") != null) {
     %>
     <jsp:useBean id="spage" class="note.util.SplitPage" scope="session">
-
     </jsp:useBean>
     <%
         NoteDAO note = new NoteDAOImpl();
         String flag = request.getParameter("flag");
         int toatalRows = 0;
+        int currentPages = 0;
 
     %>
 
@@ -80,10 +89,16 @@
                 spage.setTotalRows(toatalRows);
                 //重新计算确定当前要显示的页面值，实现翻页
                 spage.confirmPage(flag);
-
+                list = note.findAll(spage);
+            } else {
+                tm.put(strItem, strContent);
+                toatalRows = note.getRows(tm);//总的记录数
+                spage.setTotalRows(toatalRows);
+                //重新计算确定当前要显示的页面值，实现翻页
+                spage.confirmPage(flag);
+                list= note.queryByLike(tm);
             }
 
-            list = note.findAll(spage);
             for (Note n : list) {%>
         <tr>
             <td><%=n.getId()%>
@@ -96,11 +111,9 @@
             </td>
             <td>
                 <%
-                    if (session.getAttribute("name").equals(n.getAuthor())) {
-
-                    }
-                %>
-                <a href="delete?id=<%=n.getId()%>">删除</a>
+                    if (session.getAttribute("name").equals(n.getAuthor())) {%>
+                <a href="deleteServlet?id=<%=n.getId()%>">删除</a>
+                <%}%>
             </td>
         </tr>
 
@@ -112,9 +125,15 @@
                 <a href="list_note.jsp?flag=<%=SplitPage.PreviousPAGE%>&item=<%=strItem%>&content=<%=strContent%>">上一页 </a>
                 <a href="list_note.jsp?flag=<%=SplitPage.NextPAGE%>&item=<%=strItem%>&content=<%=strContent%>">下一页 </a>
                 <a href="list_note.jsp?flag=<%=SplitPage.LastPAGE%>&item=<%=strItem%>&content=<%=strContent%>">尾页</a>
+                <select id="selectPage" name="gsPage" onchange="go()">
+                    <%for (int i = 1; i < spage.getTotalPages(); i++) {%>
+                    <option value=<%=i%> <%=spage.getCurrentPage() == i ? "selected='selected'" : " "%>>
+                        <%=i%>/<%=spage.getTotalPages()%>
+                    </option>
+                    <%}%>
+                </select>
             </td>
         </tr>
-
     </table>
 
     <%
