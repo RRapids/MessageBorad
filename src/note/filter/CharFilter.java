@@ -7,42 +7,41 @@ import javax.servlet.* ;
 public class CharFilter implements Filter
 {
 	public void init(FilterConfig filterConfig)
-          throws ServletException
+			throws ServletException
 	{
-		// System.out.println("** ¹ıÂËÆ÷³õÊ¼»¯...") ;
+		// System.out.println("** è¿‡æ»¤å™¨åˆå§‹åŒ–...") ;
 	}
 	public void doFilter(ServletRequest request,ServletResponse response,FilterChain chain)
-              throws IOException,ServletException
+			throws IOException,ServletException
 	{
-		request.setCharacterEncoding("UTF-8");//²»¼ÓÕâÌõ´úÂë»áµ¼ÖÂºº×Ö´æÈëÊı¾İ¿âÊÇÂÒÂë
+		request.setCharacterEncoding("UTF-8");//ä¸åŠ è¿™æ¡ä»£ç ä¼šå¯¼è‡´æ±‰å­—å­˜å…¥æ•°æ®åº“æ˜¯ä¹±ç 
 		String content=request.getParameter("content");//System.out.println(content);
-		// Èç¹ûindexOf·µ»Ø-1Ôò±íÊ¾Ã»ÓĞ²éµ½ËùÒªµÄÄÚÈİ
+		// å¦‚æœindexOfè¿”å›-1åˆ™è¡¨ç¤ºæ²¡æœ‰æŸ¥åˆ°æ‰€è¦çš„å†…å®¹
 		if(content!=null)
 		{
-			if(content.indexOf("ÔÎ")==-1)
+			if(content.indexOf("æ™•")==-1)
 			{
 				chain.doFilter(request,response) ;
 			}
 			else
 			{
-				System.out.println("ÓĞ·Ç·¨ÎÄ×Ö") ;
+				System.out.println("æœ‰éæ³•æ–‡å­—") ;
 				response.setCharacterEncoding("UTF-8");
 				PrintWriter out=response.getWriter();
-	       		out.print("<script language=javascript>alert('ÓĞ·Ç·¨ÎÄ×Ö£¡');window.location.href='insert_error.jsp';</script>");
-				
-				// Èç¹ûĞèÒªµÄ»°£¬´Ë´¦¿ÉÒÔÊ¹ÓÃRequestDispatcher½øĞĞÌø×ª				
+				out.print("<script language=javascript>alert('æœ‰éæ³•æ–‡å­—ï¼');window.location.href='insert_error.jsp';</script>");
+
+				// å¦‚æœéœ€è¦çš„è¯ï¼Œæ­¤å¤„å¯ä»¥ä½¿ç”¨RequestDispatcherè¿›è¡Œè·³è½¬
 				//request.getRequestDispatcher("insert_error.jsp").forward(request,response) ;
-			}	
+			}
 		}
 		else
 		{
 			chain.doFilter(request,response) ;
 		}
-		
+
 	}
 	public void destroy()
 	{
-		// System.out.println("** ¹ıÂËÆ÷Ïú»Ù...") ;
+		// System.out.println("** è¿‡æ»¤å™¨é”€æ¯...") ;
 	}
 };
-
